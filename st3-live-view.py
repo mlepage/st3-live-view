@@ -34,7 +34,7 @@ class lv_manager(object):
         view_id = view.id()
         if view_id in self.views:
             lv = self.views[view_id]
-            lv.set_name(lv.name().replace('LIVE - ', 'live - '))
+            lv.set_name(lv.name().replace(u'LIVE \u2014 ', u'live \u2014 '))
             del self.views[view_id]
 
     # deregister this potentially live view
@@ -73,10 +73,10 @@ class lv_update_command(sublime_plugin.TextCommand):
             name = 'untitled'
 
         if error:
-            lv.set_name('live - ' + name)
+            lv.set_name(u'live \u2014 ' + name)
             print(error.decode())
         else:
-            lv.set_name('LIVE - ' + name)
+            lv.set_name(u'LIVE \u2014 ' + name)
             lv.replace(edit, sublime.Region(0, lv.size()), output.decode())
 
 class lv_listener(sublime_plugin.EventListener):
